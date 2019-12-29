@@ -1,0 +1,45 @@
+Configuration:
+  status: warn
+  name: Log4jYAMLConfig
+  properties:
+    property:
+      name: filename
+      value: /Users/carmel/genuniv/microservices/logs/
+  thresholdFilter:
+    level: debug
+  appenders:
+    Console:
+      name: STDOUT
+      PatternLayout:
+        Pattern: "%d{yyyy-MMM-dd HH:mm:ss} %p %m%n"
+    RollingFile:
+      name: File
+      fileName: ${filename}/ms.log
+      filePattern: ${filename}/ms-%d{yy-MM-dd}.log
+      PatternLayout:
+        Pattern: "%d{yyyy-MMM-dd HH:mm:ss} [%p - %C{1}] %m%n"
+      TimeBasedTriggeringPolicy:
+        interval: 1
+        modulate: true
+      Filters:
+        ThresholdFilter:
+          level: warn
+
+  Loggers:
+    logger:
+      -
+        name: carzanodev
+        level: info
+        additivity: false
+        AppenderRef:
+          ref: STDOUT
+      -
+        name: carzanodev
+        level: debug
+        additivity: false
+        AppenderRef:
+          ref: File
+    Root:
+      level: info
+      AppenderRef:
+        ref: STDOUT
