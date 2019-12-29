@@ -18,6 +18,9 @@ import carzanodev.genuniv.microservices.common.util.cache.DataCache;
 @RequiredArgsConstructor
 public abstract class ApiCache<ID, DATA, RESPONSE> extends DataCache<ID, DATA> {
 
+    private final ParameterizedTypeReference<StandardResponse<SourceInfo>> infoType = new ParameterizedTypeReference<>() {
+    };
+
     protected final RestTemplate restTemplate;
     protected final String apiUrl;
     protected final String apiInfoUrl;
@@ -67,17 +70,19 @@ public abstract class ApiCache<ID, DATA, RESPONSE> extends DataCache<ID, DATA> {
         return restTemplate.exchange(apiInfoUrl + "?last_updated=" + getLastLoaded(),
                 HttpMethod.GET,
                 null,
-                new ParameterizedTypeReference<StandardResponse<SourceInfo>>() {
-                }).getBody();
+                infoType
+        ).getBody();
     }
 
     protected StandardResponse<RESPONSE> getApiData() {
         return restTemplate.exchange(apiUrl,
                 HttpMethod.GET,
                 null,
-                new ParameterizedTypeReference<StandardResponse<RESPONSE>>() {
-                }).getBody();
+                getResponseType()
+        ).getBody();
     }
+
+    protected abstract ParameterizedTypeReference<StandardResponse<RESPONSE>> getResponseType();
 
     protected abstract Collection<DATA> getResultData(StandardResponse<RESPONSE> response);
 
