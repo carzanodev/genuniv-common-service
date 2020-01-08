@@ -1,0 +1,2 @@
+# 1. Overview
+The common-service is a chassis to which genuniv-services can be made. A chassis, as in the [Chassis Pattern](https://microservices.io/patterns/microservice-chassis.html) of Microservices patterns, gives a head-start to the developemnt of services, as well as address cross-cutting concerns (e.g. logging).  
