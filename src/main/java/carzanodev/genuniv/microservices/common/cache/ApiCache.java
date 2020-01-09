@@ -8,13 +8,13 @@ import org.springframework.http.HttpMethod;
 import org.springframework.web.client.RestTemplate;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 
 import carzanodev.genuniv.microservices.common.model.dto.SourceInfo;
 import carzanodev.genuniv.microservices.common.model.dto.StandardResponse;
 import carzanodev.genuniv.microservices.common.util.cache.DataCache;
 
-@Slf4j
+@Log4j2
 @RequiredArgsConstructor
 public abstract class ApiCache<ID, DATA, RESPONSE> extends DataCache<ID, DATA> {
 
