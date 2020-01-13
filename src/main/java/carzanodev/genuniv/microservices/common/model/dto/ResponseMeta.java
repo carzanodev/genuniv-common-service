@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import carzanodev.genuniv.microservices.common.util.time.TimestampUtility;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -20,7 +22,7 @@ public class ResponseMeta {
     private Timestamp timestamp;
 
     public static ResponseMeta createBasicMeta(String msg) {
-        return new ResponseMeta(msg, new Timestamp(System.currentTimeMillis()));
+        return new ResponseMeta(msg, TimestampUtility.now());
     }
 
 }

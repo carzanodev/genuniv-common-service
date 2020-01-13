@@ -9,6 +9,7 @@ import carzanodev.genuniv.microservices.common.model.dto.ResponseMeta;
 import carzanodev.genuniv.microservices.common.model.dto.SourceInfo;
 import carzanodev.genuniv.microservices.common.model.dto.StandardResponse;
 import carzanodev.genuniv.microservices.common.persistence.repository.InformationRepository;
+import carzanodev.genuniv.microservices.common.util.time.TimestampUtility;
 
 import static carzanodev.genuniv.microservices.common.util.MetaMessage.SIMPLE_MSG;
 
@@ -20,7 +21,7 @@ public abstract class InformationService {
         SourceInfo sourceInfo = new SourceInfo();
 
         if (!StringUtils.isEmpty(lastUpdated)) {
-            Timestamp lastUpdatedTs = new Timestamp(TimeUnit.SECONDS.toMillis(Long.parseLong(lastUpdated)));
+            Timestamp lastUpdatedTs = TimestampUtility.create(TimeUnit.SECONDS.toMillis(Long.parseLong(lastUpdated)));
             int countUpdates = getInfoRepo().countAllByUpdatedAtGreaterThanEqual(lastUpdatedTs);
             sourceInfo.setUpdatesCount(countUpdates);
         }

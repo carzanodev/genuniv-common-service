@@ -1,7 +1,5 @@
 package carzanodev.genuniv.microservices.common.config;
 
-import java.sql.Timestamp;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -10,13 +8,14 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import carzanodev.genuniv.microservices.common.model.dto.ApiError;
 import carzanodev.genuniv.microservices.common.model.dto.StandardResponse;
+import carzanodev.genuniv.microservices.common.util.time.TimestampUtility;
 
 public class CommonExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({InvalidTargetEntityException.class, InvalidReferenceValueException.class, NonEmptyException.class})
     public ResponseEntity<StandardResponse<Object>> handleBadRequests(Exception e, WebRequest request) {
         ApiError apiError = new ApiError(
-                new Timestamp(System.currentTimeMillis()),
+                TimestampUtility.now(),
                 HttpStatus.BAD_REQUEST.value(),
                 e.getMessage());
 
