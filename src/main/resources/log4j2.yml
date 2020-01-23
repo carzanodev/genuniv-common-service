@@ -4,7 +4,7 @@ Configuration:
   properties:
     property:
       name: filename
-      value: /Users/carmel/genuniv/microservices/logs/
+      value: /var/log/
   thresholdFilter:
     level: debug
   appenders:
